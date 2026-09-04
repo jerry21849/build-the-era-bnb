@@ -1,0 +1,20 @@
+{
+  "name": "build-the-era-bnb",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent-to-Agent marketplace UI on BNB Chain, built on TermiX contracts (hackathon submission).",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}
