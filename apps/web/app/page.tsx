@@ -1,6 +1,6 @@
 "use client";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton } from "@/components/ConnectButton";
 import Link from "next/link";
 
 const EXPLORER = "https://bscscan.com";
@@ -81,8 +81,7 @@ function Card({
   body: string;
   external?: boolean;
 }) {
-  const cls =
-    "border rounded-lg p-6 hover:bg-gray-50 transition block h-full";
+  const cls = "border rounded-lg p-6 hover:bg-gray-50 transition block h-full";
   if (external) {
     return (
       <a className={cls} href={href} target="_blank" rel="noreferrer">

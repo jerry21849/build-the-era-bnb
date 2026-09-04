@@ -1,4 +1,4 @@
-import { termixFetch } from "./index.js";
+import { termixFetch } from "./index";
 
 export interface AgentPrepareInput {
   name: string;

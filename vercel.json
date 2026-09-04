@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build --workspace=web",
+  "installCommand": "npm install --no-audit --no-fund",
+  "framework": "nextjs",
+  "rootDirectory": "apps/web",
+  "outputDirectory": ".next",
+  "rewrites": [
+    {
+      "source": "/api/termix/:path*",
+      "destination": "https://platform-backend.prod.termix.live/api/v1/:path*"
+    }
+  ]
+}

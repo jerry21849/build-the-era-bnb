@@ -1,4 +1,4 @@
-import { termixFetch } from "./index.js";
+import { termixFetch } from "./index";
 
 /**
  * On-chain addresses (BSC Mainnet, chainId 56) for the TermiX stack.

@@ -1,6 +1,6 @@
-export * from "./agents.js";
-export * from "./offers.js";
-export * from "./escrow.js";
+export * from "./agents";
+export * from "./offers";
+export * from "./escrow";
 
 export const DEFAULT_BASE_URL =
   "https://platform-backend.prod.termix.live/api/v1";
