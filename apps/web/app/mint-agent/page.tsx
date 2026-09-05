@@ -84,7 +84,11 @@ export default function MintAgentPage() {
       for (let i = 0; i < 30; i++) {
         const r = await getAgentByTxHash(hash as `0x${string}`, sessionToken);
         if (r.status === "CONFIRMED") {
-          setConfirmedAgentTokenId(r.agent?.agentTokenId ?? null);
+          const tokenId = r.agent?.agentTokenId ?? null;
+          setConfirmedAgentTokenId(tokenId);
+          if (tokenId) {
+            window.localStorage.setItem("provider_agent_token_id", tokenId);
+          }
           break;
         }
         await new Promise((res) => setTimeout(res, 4000));

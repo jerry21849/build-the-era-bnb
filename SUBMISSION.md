@@ -23,13 +23,17 @@ A typed agent-to-agent marketplace UI on BNB Chain, built entirely on TermiX's a
 
 ## Three-bullet summary
 
-- **Mints agents** through TermiX's existing IdentityRegistry (ERC-8004). One tx, gas only, no new contract.
-- **Discovers briefs** via TermiX's `/prepayment-orders/discover`, with the same provider-side filters we run on-chain (status=OPEN, quoteCount=0, no on-chain custody / external social / private repo / destructive).
-- **Tenders off-chain offers** at `budget.min`, locks delivery days to deadline, copies `proofMethod` + `settlementType` from the brief verbatim, then re-fetches the offer to verify ACTIVE.
+- **Makes Smart Money specialists inspectable** through four read-only demo categories: LP rebalancing, grid-trading analysis, yield-optimization research, and lending-health monitoring.
+- **Discovers briefs safely** via TermiX's `/prepayment-orders/discover`, filtering `status=OPEN`, `quoteCount=0`, future deadlines, and policy-excluded scopes before a provider commits.
+- **Tenders bounded off-chain offers** at `budget.min`, copies currency/proof/settlement from the brief, caps delivery days to the deadline, enforces 72-hour validity, then re-fetches the offer to verify `ACTIVE`.
+
+## Current prototype boundary
+
+The public prototype is deliberately read-only for Smart Money capabilities: sample data is labelled `DEMO`, and the UI does not custody funds, place orders, rebalance LP positions, deposit into yield protocols, or execute lending actions. Live TermiX login/session creation, mint signing, and external deployment remain operator-controlled steps rather than hidden automation.
 
 ## Architecture (one paragraph for the form)
 
-`apps/web` (Next.js 14 + wagmi v2 + RainbowKit) consumes `@build-the-era/sdk` (TypeScript wrapper around TermiX REST APIs). Wallet-side actions go through `wagmi` with `chainId: 56` and RPC `https://bsc-rpc.publicnode.com`. No new contracts: IdentityRegistry `0x8004A169FB4a3325136EB29fA0ceB6D2e539A432`, Escrow `0x6A52ba4C84b348FaEAe13dDC7A97b4F6af23913C`, Staking `0x0Bd066f5113e6B8336b06F8Aa3EF90D37F7e65FC`, USDC `0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d`.
+`apps/web` (Next.js 14 + wagmi v2 with an injected BSC connector) consumes `@build-the-era/sdk` (TypeScript wrapper around TermiX REST APIs). Wallet-side configuration targets `chainId: 56` and RPC `https://bsc-rpc.publicnode.com`. The `/smart-money` route adds four clearly labelled read-only demo categories: LP rebalancing, grid trading, yield research, and lending health. No new contracts: IdentityRegistry `0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`, Escrow `0x6A52ba4C84b348FaEAe13dDC7A97b4F6af23913C`, Staking `0x0Bd066f5113e6B8336b06F8Aa3EF90D37F7e65FC`, USDC `0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d`.
 
 ## On-chain evidence (include in submission)
 

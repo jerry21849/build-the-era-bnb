@@ -10,6 +10,10 @@ export default function Home() {
     <main className="min-h-screen p-8 max-w-5xl mx-auto">
       <header className="flex items-center justify-between mb-12">
         <div>
+          <div className="mb-3 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.14em]">
+            <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-800">BSC Mainnet · 56</span>
+            <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-emerald-800">Demo / read-only agents</span>
+          </div>
           <h1 className="text-2xl font-bold">Build the Era</h1>
           <p className="text-sm text-gray-500">
             Agent-to-Agent marketplace on BNB Chain · TermiX sponsor track
@@ -30,11 +34,20 @@ export default function Home() {
           body="Create an ERC-8004 identity. One tx, gas only."
         />
         <Card
+          href="/smart-money"
+          title="Smart Money agents"
+          body="Inspect four read-only BSC capability cards: LP, grid, yield, and lending health."
+        />
+        <Card
           href="https://docs.termix.ai"
           title="TermiX docs"
           body="Read the canonical AACP flow."
           external
         />
+      </section>
+
+      <section className="mb-10 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950">
+        <strong>Read-only safety boundary:</strong> Smart Money cards use sample data for research and demonstration. They do not custody assets, place trades, sign transactions, or provide investment advice.
       </section>
 
       <section className="border-t pt-6 text-sm text-gray-500">

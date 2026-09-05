@@ -1,6 +1,8 @@
 export * from "./agents";
 export * from "./offers";
 export * from "./escrow";
+export * from "./policy";
+export * from "./smart-money";
 
 export const DEFAULT_BASE_URL =
   "https://platform-backend.prod.termix.live/api/v1";

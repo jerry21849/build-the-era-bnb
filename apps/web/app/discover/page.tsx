@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ConnectButton } from "@/components/ConnectButton";
 import Link from "next/link";
-import { discover, type Brief } from "@build-the-era/sdk";
+import { discover, eligibleBriefs, type Brief } from "@build-the-era/sdk";
 
 export default function DiscoverPage() {
   const [items, setItems] = useState<Brief[]>([]);
@@ -22,9 +22,9 @@ export default function DiscoverPage() {
           sessionToken
         );
         if (cancel) return;
-        // Filter to quoteCount===0 per policy
-        setItems(res.items.filter((b) => b.quoteCount === 0));
-        setTotal(res.total);
+        const eligible = eligibleBriefs(res.items);
+        setItems(eligible);
+        setTotal(eligible.length);
       } catch (e) {
         if (!cancel) setError(e instanceof Error ? e.message : String(e));
       } finally {

@@ -1,4 +1,5 @@
 import { termixFetch } from "./index";
+import { briefSkipReason, deliveryDaysForDeadline, validateOfferInput } from "./policy";
 
 export interface DiscoverQuery {
   pageSize?: number;
@@ -59,8 +60,13 @@ export async function submitOffer(
   briefId: string,
   input: OfferInput,
   sessionToken: string,
-  baseUrl?: string
+  baseUrl?: string,
+  brief?: Brief
 ) {
+  if (brief) {
+    const errors = validateOfferInput(brief, input);
+    if (errors.length > 0) throw new Error(errors.join("; "));
+  }
   return termixFetch<{
     id: string;
     status: "ACTIVE" | "WITHDRAWN" | "EXPIRED" | "ACCEPTED";
@@ -72,6 +78,28 @@ export async function submitOffer(
     sessionToken,
     baseUrl,
   });
+}
+
+export function makeOfferInput(
+  brief: Brief,
+  providerAgentId: string,
+  scope: string,
+  message: string,
+  now = Date.now()
+): OfferInput {
+  const deliveryDays = deliveryDaysForDeadline(brief.deadlineAt, now, 3);
+  if (deliveryDays === null) throw new Error("Brief has less than one day remaining");
+  return {
+    providerAgentId,
+    price: brief.budget.min,
+    currency: brief.budget.currency,
+    deliveryDays,
+    scope,
+    proofMethod: brief.proofMethod,
+    settlementType: brief.settlementType,
+    message,
+    validUntilHours: 72,
+  };
 }
 
 export async function getOffer(

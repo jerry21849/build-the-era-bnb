@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@/components/ConnectButton";
 import { useParams } from "next/navigation";
+
+const TERMIX_BASE = process.env.NEXT_PUBLIC_TERMIX_BASE ?? "https://platform-backend.prod.termix.live";
 import {
   type Brief,
   getOffer,
   submitOffer,
   type OfferInput,
+  validateOfferInput,
 } from "@build-the-era/sdk";
 
 export default function OfferPage() {
@@ -42,7 +45,7 @@ export default function OfferPage() {
         // Re-fetch the brief via the discover endpoint filter — using the
         // getOffer endpoint requires an offer id, so we filter discover.
         const res = await fetch(
-          `https://platform-backend.prod.termix.live/api/v1/prepayment-orders/${briefId}`,
+          `${TERMIX_BASE}/api/v1/prepayment-orders/${briefId}`,
           sessionToken
             ? { headers: { authorization: `Bearer ${sessionToken}` } }
             : undefined
@@ -81,26 +84,28 @@ export default function OfferPage() {
         { headers: { authorization: `Bearer ${sessionToken}` } }
       );
       if (!fresh.ok) throw new Error(`Re-fetch failed: ${fresh.status}`);
-      const freshData = await fresh.json();
+      const freshData = (await fresh.json()) as Brief;
       if (freshData.status !== "OPEN") throw new Error("Brief no longer OPEN.");
       if (freshData.quoteCount > 0)
         throw new Error("Brief already has quotes — skipping.");
 
       const input: OfferInput = {
         providerAgentId: window.localStorage.getItem("provider_agent_id") ?? "",
-        price,
-        currency,
-        deliveryDays,
+        price: freshData.budget.min,
+        currency: freshData.budget.currency,
+        deliveryDays: 3,
         scope,
         proofMethod: freshData.proofMethod,
         settlementType: freshData.settlementType,
         message,
-        validUntilHours,
+        validUntilHours: 72,
       };
+      const errors = validateOfferInput(freshData, input);
+      if (errors.length > 0) throw new Error(errors.join("; "));
       if (!input.providerAgentId)
         throw new Error("Missing providerAgentId. Mint agent first.");
 
-      const result = await submitOffer(brief.id, input, sessionToken);
+      const result = await submitOffer(brief.id, input, sessionToken, undefined, freshData);
       setOfferId(result.id);
 
       // Verify ACTIVE
@@ -140,16 +145,16 @@ export default function OfferPage() {
       >
         <Row label="Price (locked to budget.min)">
           <input
-            className="w-full border rounded p-2 font-mono"
+            readOnly
+            className="w-full border rounded p-2 bg-slate-50 font-mono"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
           />
         </Row>
-        <Row label="Currency">
+        <Row label="Currency (copied from brief)">
           <input
-            className="w-full border rounded p-2 font-mono"
+            readOnly
+            className="w-full border rounded p-2 bg-slate-50 font-mono"
             value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
           />
         </Row>
         <Row label="Delivery days (≤ deadline)">

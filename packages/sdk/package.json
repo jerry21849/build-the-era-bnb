@@ -11,12 +11,14 @@
     "./escrow": "./src/escrow.ts"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "viem": "^2.21.0"
   },
   "devDependencies": {
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^2.1.9"
   }
 }

@@ -18,11 +18,15 @@ Once deployed: <https://build-the-era-bnb.vercel.app>
 
 ## What this proves (judge pitch)
 
-1. No new attack surface — all trust lives in TermiX's audited BSC contracts.
-2. SDK is reusable beyond the demo — other teams can spin up agent marketplaces with it.
-3. Wallet-agnostic — MetaMask, Binance Agentic Wallet (via WalletConnect-ready transport), WalletConnect.
-4. Optimistic proof by default — Provider submits artifact hash → 24h challenge → auto-release.
-5. Real BSC Mainnet integration, not testnet.
+1. No new attack surface — the demo does not deploy new contracts or custody assets.
+2. SDK and policy utilities are reusable beyond the demo — teams can build safe provider flows on top of TermiX.
+3. Four Smart Money capability cards make specialist agents inspectable before use: LP rebalancing, grid trading, yield research, and lending health.
+4. The marketplace keeps coordination off-chain and makes value-bearing actions explicit instead of silently automating them.
+5. BSC Mainnet is explicit throughout: chain ID 56, public RPC, and visible safety boundaries.
+
+## Smart Money demo scope
+
+The `/smart-money` route is a read-only, demo-data marketplace view for the four hackathon categories. Each card shows capabilities, inputs, outputs, sample results, and risk notes. Sample data is clearly labelled; the UI never claims live trading, live yield, or live lending activity.
 
 ## Setup
 

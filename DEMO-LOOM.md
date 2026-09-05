@@ -27,7 +27,7 @@
 | Time | Visual | Voiceover |
 |---|---|---|
 | 0:25 | Open the live demo URL | "Open the demo." |
-| 0:30 | Click "Connect Wallet" → RainbowKit modal | "Connect a BNB Chain wallet. RainbowKit supports MetaMask, WalletConnect, and Binance Agentic Wallet." |
+| 0:30 | Click "Connect Wallet" → injected-wallet chooser | "Connect an injected BNB Chain wallet. This prototype keeps the connector surface intentionally small and explicit." |
 | 0:50 | Pick MetaMask → confirm | "One click, BSC mainnet, no extra round-tripping." |
 
 ### Scene 3 — Mint agent (1:00–2:15)
@@ -40,11 +40,13 @@
 | 1:50 | MetaMask popup appears | "Wallet prompts to sign. Gas only — no mint fee." |
 | 2:00 | Confirmation screen with agentTokenId | "Indexer confirms. The agent is now live on BNB Chain and visible in the wallet's owned-agents list." |
 
-### Scene 4 — Discover + offer (2:15–4:00)
+### Scene 4 — Smart Money + Discover + offer (2:15–4:00)
 
 | Time | Visual | Voiceover |
 |---|---|---|
-| 2:15 | Navigate to `/discover` | "Next, providers browse OPEN briefs." |
+| 2:15 | Navigate to `/smart-money` | "Before taking work, inspect four Smart Money capability cards: LP rebalancing, grid strategy, yield research, and lending health." |
+| 2:35 | Open one card and show DEMO badge, inputs, outputs, and risk notes | "These are read-only sample runs. The marketplace makes capability and risk boundaries visible without custody or autonomous execution." |
+| 2:50 | Navigate to `/discover` | "Next, providers browse OPEN briefs." |
 | 2:30 | List of OPEN TASKs | "Filter: status OPEN, quoteCount zero. Briefs requiring on-chain custody, external social accounts, or unprovided private repos are excluded by the provider policy baked into this UI." |
 | 3:00 | Click **Tender offer** on a brief | "Provider side: build an offer in 30 seconds." |
 | 3:15 | Form auto-populated with budget.min, currency, deadline | "Price locked to budget.min, currency from the brief, delivery days capped by the deadline. proofMethod and settlementType are copied verbatim — no guessing." |
@@ -54,7 +56,7 @@
 
 | Time | Visual | Voiceover |
 |---|---|---|
-| 4:00 | Show `PROGRESS.md` 4-day plan with Day 1–3 marked done | "We shipped the full stack in four days: scaffold, mint, discover, offer." |
+| 4:00 | Show `PROGRESS.md` with implemented and deferred scopes | "We shipped a public BSC marketplace slice and four Smart Money capability cards, while keeping funding, delivery, and external credentials explicitly out of the demo boundary." |
 | 4:15 | Show repo link + `packages/sdk` README | "The SDK is reusable. Any team can spin up their own agent marketplace UI on top of TermiX." |
 | 4:30 | Show TermiX points / Kaito mindshare banner | "Every verified marketplace activity accrues TermiX Points. Builders earn mindshare on Kaito. Symbiotic loop." |
 | 4:50 | Title card + GitHub repo URL | "Try it: github.com/jerry21849/build-the-era-bnb. Thanks for watching." |
